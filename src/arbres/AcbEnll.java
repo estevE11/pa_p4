@@ -2,7 +2,7 @@ package arbres;
 
 import java.util.Queue;
 
-public class AcbEnll<E extends  Comparable<E>> {
+public class AcbEnll<E extends Comparable<E>> implements Acb{
     private class NodeA {
         NodeA l, r;
         E infM;
@@ -65,4 +65,44 @@ public class AcbEnll<E extends  Comparable<E>> {
     public boolean compareTo(AcbEnll<E> other) {
         return false;
     }
+    @Override
+    public Comparable arrel() throws ArbreException {
+        return null;
+    }
+
+    @Override
+    public Acb fillEsquerre() {
+        return null;
+    }
+
+    @Override
+    public Acb fillDret() {
+        return null;
+    }
+
+    @Override
+    public boolean abBuit() {
+        return false;
+    }
+
+    @Override
+    public void buidar() {
+
+    }
+
+    @Override
+    public void inserir(Comparable comparable) throws ArbreException {
+
+    }
+
+    @Override
+    public void esborrar(Comparable comparable) throws ArbreException {
+
+    }
+
+    @Override
+    public boolean membre(Comparable comparable) {
+        return false;
+    }
+
 }

@@ -2,14 +2,15 @@ package arbres;
 
 public interface Acb<E extends Comparable<E>> {
 
-    E arrel() throws ArbreException;
     //Cal llençar una excepció si es demana l'arrel d'un arbre buit
-    Acb<E> fillEsquerre();
+    E arrel() throws ArbreException;
 
     // No llença excepcions. Si no té fill esquerre retorna un arbre buit public
-    Acb<E> fillDret();
+    Acb<E> fillEsquerre();
 
     // No llença excepcions. Si no té fill dret retorna una arbre buit
+    Acb<E> fillDret();
+
     boolean abBuit();
 
     void buidar();

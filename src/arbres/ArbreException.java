@@ -1,4 +1,4 @@
 package arbres;
 
-public class ArbreException extends Throwable {
+public class ArbreException extends Exception {
 }
