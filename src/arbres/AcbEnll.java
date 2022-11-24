@@ -110,21 +110,14 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
 
     @Override
     public Acb fillEsquerre() {
-        /* No entiendo
         NodeA l = this.root.l;
         return new AcbEnll(l.inf, l.l, l.r);
-        */
-
-        return null;
     }
 
     @Override
     public Acb fillDret() {
-        /* No entiendo
         NodeA r = this.root.r;
         return new AcbEnll(r.inf, r.l, r.r);
-        */
-        return null;
     }
 
     @Override
