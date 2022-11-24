@@ -14,5 +14,10 @@ public class Main {
             System.out.println(c.toString());
             arbre.inserir(c);
         }
+
+        System.out.println("caca");
+        arbre.esborrar(new Carta(2, 2));
+        System.out.println("caca");
+
     }
 }

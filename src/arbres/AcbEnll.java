@@ -1,5 +1,7 @@
 package arbres;
 
+import cartes.Carta;
+
 import java.util.Queue;
 
 public class AcbEnll<E extends Comparable<E>> implements Acb{
@@ -105,7 +107,7 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
 
     @Override
     public Comparable arrel() throws ArbreException {
-        return null;
+        return (Comparable) this.root;
     }
 
     @Override
@@ -127,7 +129,7 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
 
     @Override
     public void buidar() {
-
+        this.root = null;
     }
 
     @Override
@@ -139,7 +141,44 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
 
     @Override
     public void esborrar(Comparable c) throws ArbreException {
+        this.root = this.esborrar(this.root, (E)c);
+    }
 
+    private NodeA esborrar(NodeA n, E e) {
+        if(n == null) throw new RuntimeException("no existeix " + e.toString());
+        int comp = n.inf.compareTo(e);
+        if(comp < 0) {
+            n.l = esborrar(n.l, e);
+        } else {
+            if(comp > 0) {
+                n.r = esborrar(n.r, e);
+            } else {
+                if(n.l == null && n.r == null) n = null;
+                else {
+                    if(n.l != null && n.r != null) {
+                        n = this.searchMin(n.r);
+                        n.r = deleteMin(n.r);
+                    } else {
+                        if(n.l == null) n = n.r;
+                        else n = n.l;
+                    }
+                }
+            }
+        }
+        return n;
+    }
+
+    private NodeA searchMin(NodeA n) {
+        while(n.l != null) n = n.l;
+        return n;
+    }
+
+    private NodeA deleteMin(NodeA n) {
+        if(n.l == null) return n.r;
+        else {
+            n.l = deleteMin(n.l);
+            return n;
+        }
     }
 
     @Override
