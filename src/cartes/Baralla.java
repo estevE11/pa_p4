@@ -10,7 +10,7 @@ public class Baralla {
     private Node root;
 
     public Baralla() {
-        // Crear una baraja entera desordenada
+        // Crear una baraja entera desordenada (bueno en este caso ordenada, pero ns si importa)
         this.root = new Node();
         Node curr = this.root;
         for (int i = 0; i < Carta.TYPES.length; i++) {

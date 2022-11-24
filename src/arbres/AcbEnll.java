@@ -3,13 +3,38 @@ package arbres;
 import java.util.Queue;
 
 public class AcbEnll<E extends Comparable<E>> implements Acb{
+
     private class NodeA {
         NodeA l, r;
-        E infM;
+        E inf;
+
+        NodeA(E inf, NodeA l, NodeA r) {
+            this.inf = inf;
+            this.l = l;
+            this.r = r;
+        }
+
+        NodeA(E inf) {
+            this.inf = inf;
+            this.l = null;
+            this.r = null;
+        }
+
+        public void insert(E val) {
+
+        }
     }
 
     private NodeA root;
     private Queue<E> queue;
+
+    public AcbEnll(E val, NodeA l, NodeA r) {
+        this.root = new NodeA(val, l, r);
+    }
+
+    public AcbEnll(E val) {
+        this.root = new NodeA(val);
+    }
 
     /*
         prepara l’arbre per a ser recorregut en inordre. Després d’invocar
@@ -65,6 +90,7 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
     public boolean compareTo(AcbEnll<E> other) {
         return false;
     }
+
     @Override
     public Comparable arrel() throws ArbreException {
         return null;
@@ -72,17 +98,23 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
 
     @Override
     public Acb fillEsquerre() {
-        return null;
+        /* No entiendo
+        NodeA l = this.root.l;
+        return new AcbEnll(l.inf, l.l, l.r);
+        */
     }
 
     @Override
     public Acb fillDret() {
-        return null;
+        /* No entiendo
+        NodeA r = this.root.r;
+        return new AcbEnll(r.inf, r.l, r.r);
+        */
     }
 
     @Override
     public boolean abBuit() {
-        return false;
+        return this.root == null;
     }
 
     @Override
@@ -91,17 +123,19 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
     }
 
     @Override
-    public void inserir(Comparable comparable) throws ArbreException {
+    public void inserir(Comparable c) throws ArbreException {
+        E val = (E)c;
+        if(this.root == null) this.root = new NodeA((E)c, null, null);
+        else this.root.insert(val);
+    }
+
+    @Override
+    public void esborrar(Comparable c) throws ArbreException {
 
     }
 
     @Override
-    public void esborrar(Comparable comparable) throws ArbreException {
-
-    }
-
-    @Override
-    public boolean membre(Comparable comparable) {
+    public boolean membre(Comparable c) {
         return false;
     }
 
