@@ -24,6 +24,8 @@ public class Carta implements Comparable<Carta> {
 
     @Override
     public int compareTo(Carta o) {
-        return o.getTypeID() - this.type_id;
+        int comp_type = o.getTypeID() - this.type_id;
+        if(comp_type == 0) return o.getNum() - this.getNum();
+        return comp_type;
     }
 }

@@ -21,7 +21,16 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
         }
 
         public void insert(E val) {
-
+            int comp = this.inf.compareTo(val);
+            if(comp > 0) {
+                if(this.r == null) this.r = new NodeA(val);
+                else this.r.insert(val);
+            } else if(comp < 0) {
+                if(this.l == null) this.l = new NodeA(val);
+                else this.r.insert(val);
+            }
+            // Si la comparació es 0 vol dir que el que intentem
+            // inserir ja existeix per tant no l'inserim
         }
     }
 
@@ -34,6 +43,9 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
 
     public AcbEnll(E val) {
         this.root = new NodeA(val);
+    }
+    public AcbEnll() {
+        this.root = null;
     }
 
     /*
@@ -102,6 +114,8 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
         NodeA l = this.root.l;
         return new AcbEnll(l.inf, l.l, l.r);
         */
+
+        return null;
     }
 
     @Override
@@ -110,6 +124,7 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
         NodeA r = this.root.r;
         return new AcbEnll(r.inf, r.l, r.r);
         */
+        return null;
     }
 
     @Override
@@ -125,7 +140,7 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
     @Override
     public void inserir(Comparable c) throws ArbreException {
         E val = (E)c;
-        if(this.root == null) this.root = new NodeA((E)c, null, null);
+        if(this.root == null) this.root = new NodeA(val, null, null);
         else this.root.insert(val);
     }
 

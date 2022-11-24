@@ -1,8 +1,18 @@
 package cartes;
 
+import arbres.Acb;
 import arbres.AcbEnll;
+import arbres.ArbreException;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ArbreException {
+        System.out.println("hola buenas");
+        AcbEnll<Carta> arbre = new AcbEnll<Carta>();
+        Baralla b = new Baralla();
+        for(int i = 0; i < b.size(); i++) {
+            Carta c = b.get(i);
+            System.out.println(c.toString());
+            arbre.inserir(c);
+        }
     }
 }
