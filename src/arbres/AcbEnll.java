@@ -27,7 +27,7 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
                 else this.r.insert(val);
             } else if(comp < 0) {
                 if(this.l == null) this.l = new NodeA(val);
-                else this.r.insert(val);
+                else this.l.insert(val);
             }
             // Si la comparació es 0 vol dir que el que intentem
             // inserir ja existeix per tant no l'inserim
