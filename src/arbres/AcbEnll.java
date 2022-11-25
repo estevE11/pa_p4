@@ -174,7 +174,7 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
     }
 
     private NodeA deleteMin(NodeA n) {
-        if(n.l == null) return n.r;
+        if(n.l == null) return n.r; // de vez en cuando falla aqui, no entiendo ni cuando ni como
         else {
             n.l = deleteMin(n.l);
             return n;
