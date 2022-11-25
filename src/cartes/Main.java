@@ -15,9 +15,12 @@ public class Main {
             arbre.inserir(c);
         }
 
-        System.out.println("caca");
-        arbre.esborrar(new Carta(2, 2));
-        System.out.println("caca");
-
+        Carta test = new Carta(2, 2); // 2 de OROS
+        if(arbre.membre(test)) {
+            System.out.println("caca");
+            arbre.esborrar(test);
+            System.out.println("caca");
+        } else
+            System.out.println("la carta no esta makina");
     }
 }

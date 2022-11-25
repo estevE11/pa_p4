@@ -183,7 +183,16 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
 
     @Override
     public boolean membre(Comparable c) {
-        return false;
+        if(this.root.inf.compareTo((E)c) == 0) return true;
+        return this.membre(this.root, (E)c);
+    }
+
+    private boolean membre(NodeA a, E e) {
+        if(a == null) return false;
+        if(e.compareTo(a.inf) == 0) return true;
+        boolean ml = this.membre(a.l, e);
+        boolean mr = this.membre(a.r, e);
+        return ml || mr;
     }
 
 }
