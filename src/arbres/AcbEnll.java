@@ -4,7 +4,8 @@ import cartes.Carta;
 
 import java.util.Queue;
 
-public class AcbEnll<E extends Comparable<E>> implements Acb{
+public class
+AcbEnll<E extends Comparable<E>> implements Acb{
 
     private class NodeA {
         NodeA l, r;
@@ -183,16 +184,14 @@ public class AcbEnll<E extends Comparable<E>> implements Acb{
 
     @Override
     public boolean membre(Comparable c) {
-        if(this.root.inf.compareTo((E)c) == 0) return true;
         return this.membre(this.root, (E)c);
     }
 
     private boolean membre(NodeA a, E e) {
         if(a == null) return false;
         if(e.compareTo(a.inf) == 0) return true;
-        boolean ml = this.membre(a.l, e);
-        boolean mr = this.membre(a.r, e);
-        return ml || mr;
+        if(e.compareTo(a.inf)<0) return membre(a.l,e);
+        else return membre(a.r,e);
     }
 
 }
