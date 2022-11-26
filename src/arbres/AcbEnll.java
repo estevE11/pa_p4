@@ -23,7 +23,26 @@ AcbEnll<E extends Comparable<E>> implements Acb{
             this.r = null;
         }
 
-        public void insert(E val) {
+        public int count(){
+            int count = 0;
+            if (this == null) return 0;
+            if (this.l == null && this.r == null) count++;
+            this.l.count();this.r.count();
+            return count;
+        }
+
+        public boolean hiEs(E val){
+            if (val.compareTo(this.inf) < 0){
+                if (this.l==null) return false;
+                return this.l.hiEs(val);
+            } else if (val.compareTo(this.inf) > 0) {
+                if (this.r==null) return false;
+                return this.r.hiEs(val);
+            }else{
+                return true;
+            }
+        }
+        public void insert(E val) throws ArbreException{
             int comp = this.inf.compareTo(val);
             if(comp > 0) {
                 if(this.r == null) this.r = new NodeA(val);
@@ -31,9 +50,14 @@ AcbEnll<E extends Comparable<E>> implements Acb{
             } else if(comp < 0) {
                 if(this.l == null) this.l = new NodeA(val);
                 else this.l.insert(val);
+            }else {
+                throw new ArbreException("No es pot inserir perque ja existeix.");
             }
             // Si la comparació es 0 vol dir que el que intentem
             // inserir ja existeix per tant no l'inserim
+        }
+        public void esborrar(E val) throws ArbreException{
+
         }
     }
 
@@ -91,7 +115,7 @@ AcbEnll<E extends Comparable<E>> implements Acb{
 
     // Retorna el numero de nodes q te l'arbre
     public int cardinalitat() {
-        return 0;
+        return this.root.count();
     }
 
     public Object clone() {
@@ -119,6 +143,7 @@ AcbEnll<E extends Comparable<E>> implements Acb{
 
     @Override
     public Acb fillDret() {
+
         NodeA r = this.root.r;
         return new AcbEnll(r.inf, r.l, r.r);
     }
@@ -184,7 +209,9 @@ AcbEnll<E extends Comparable<E>> implements Acb{
 
     @Override
     public boolean membre(Comparable c) {
-        return this.membre(this.root, (E)c);
+        if (this.root == null) return false;
+        return this.root.hiEs((E)c);
+        //return this.membre(this.root, (E)c);
     }
 
     private boolean membre(NodeA a, E e) {
