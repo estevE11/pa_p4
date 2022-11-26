@@ -55,7 +55,7 @@ AcbEnll<E extends Comparable<E>> implements Acb{
             } else if(comp < 0) {
                 if(this.l == null) this.l = new NodeA(val);
                 else this.l.insert(val);
-            }else {
+            } else {
                 //throw new ArbreException("No es pot inserir perque ja existeix.");
             }
             // Si la comparació es 0 vol dir que el que intentem
@@ -123,6 +123,7 @@ AcbEnll<E extends Comparable<E>> implements Acb{
         mètode segRecorregut
     */
     public boolean finalRecorregut() {
+        if(this.queue == null) return false;
         return this.queue.peek() == null;
     }
 

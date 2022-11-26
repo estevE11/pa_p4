@@ -21,7 +21,6 @@ public class Main {
         } else
             System.out.println("la carta no esta makina");
 
-        arbre.iniRecorregut(true);
         while(!arbre.finalRecorregut()) {
             Carta c = arbre.segRecorregut();
             System.out.println(c.toString());
