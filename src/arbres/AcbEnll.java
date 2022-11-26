@@ -137,14 +137,6 @@ AcbEnll<E extends Comparable<E>> implements Acb{
         return null;
     }
 
-    // Se pueden añadir metodos privados nunca publicos
-
-
-    // Implementar el metodo "compareTO"
-    public boolean compareTo(AcbEnll<E> other) {
-        return false;
-    }
-
     @Override
     public Comparable arrel() throws ArbreException {
         return (Comparable) this.root;
