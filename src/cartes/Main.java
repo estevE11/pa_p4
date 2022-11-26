@@ -24,5 +24,6 @@ public class Main {
             System.out.println("la carta no esta makina");
 
         arbre.iniRecorregut(true);
+        System.out.println("caca");
     }
 }

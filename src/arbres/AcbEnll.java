@@ -85,20 +85,28 @@ AcbEnll<E extends Comparable<E>> implements Acb{
     */
     public void iniRecorregut(boolean sentit) {
         this.queue = new LinkedList<E>();
-        this.addToQueue(this.root);
+        this.addToQueue(this.root, sentit);
         System.out.println("afegit");
     }
 
-    private void addToQueue(NodeA a) {
+    private void addToQueue(NodeA a, boolean sentit) {
         if(a.l == null && a.r == null) {
             this.queue.add(a.inf);
             return;
         }
 
-        if(a.l != null) this.addToQueue(a.l);
+        if(sentit) {
+            if (a.l != null) this.addToQueue(a.l, sentit);
+        } else
+            if(a.r != null) this.addToQueue(a.r, sentit);
+
+
         this.queue.add(a.inf);
 
-        if(a.r != null) this.addToQueue(a.r);
+        if(sentit) {
+            if (a.r != null) this.addToQueue(a.r, sentit);
+        } else
+            if(a.l != null) this.addToQueue(a.l, sentit);
     }
 
     /*
@@ -111,7 +119,7 @@ AcbEnll<E extends Comparable<E>> implements Acb{
         mètode segRecorregut
     */
     public boolean finalRecorregut() {
-        return false;
+        return this.queue.peek() == null;
     }
 
     /*
@@ -125,7 +133,7 @@ AcbEnll<E extends Comparable<E>> implements Acb{
         mètode inserir, esborrar, buidar
     */
     public E segRecorregut() throws ArbreException {
-        return null;
+        return this.queue.poll();
     }
 
     // Retorna el numero de nodes q te l'arbre
