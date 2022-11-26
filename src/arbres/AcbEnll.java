@@ -25,11 +25,15 @@ AcbEnll<E extends Comparable<E>> implements Acb{
         }
 
         public int count(){
-            int count = 0;
-            if (this == null) return 0;
-            if (this.l == null && this.r == null) count++;
-            this.l.count();this.r.count();
-            return count;
+            System.out.println("contando: " + this.inf.toString());
+            if (this.l == null && this.r == null) {
+                return 1;
+            } else {
+                int c = 0;
+                if(this.l != null) c += this.l.count();
+                if(this.r != null) c += this.r.count();
+                return c+1;
+            }
         }
 
         public boolean hiEs(E val){ // NO FUNCIONA CRACK
@@ -132,13 +136,19 @@ AcbEnll<E extends Comparable<E>> implements Acb{
         s’ha produït una modificació de l’arbre, això és, s’ha fet ús del
         mètode inserir, esborrar, buidar
     */
+
     public E segRecorregut() throws ArbreException {
-        return this.queue.poll();
+        if(this.queue == null) throw new ArbreException("No s'ha cridat el metode iniRecorregut o s'ha produit una modificació de l'arbre sense cridar al metode iniRecorregut");
+        E e = this.queue.poll();
+        if(e == null) throw new ArbreException("La darrera vegada que es va invocar aquest metode ja es va retornar l'ultim element");
+        return e;
     }
 
     // Retorna el numero de nodes q te l'arbre
     public int cardinalitat() {
-        return this.root.count();
+        int c = this.root.count();
+        System.out.println(c);
+        return c;
     }
 
     public Object clone() {
@@ -171,6 +181,7 @@ AcbEnll<E extends Comparable<E>> implements Acb{
     @Override
     public void buidar() {
         this.root = null;
+        this.queue = null;
     }
 
     @Override
@@ -178,11 +189,13 @@ AcbEnll<E extends Comparable<E>> implements Acb{
         E val = (E)c;
         if(this.root == null) this.root = new NodeA(val, null, null);
         else this.root.insert(val);
+        this.queue = null;
     }
 
     @Override
     public void esborrar(Comparable c) throws ArbreException {
         this.root = this.esborrar(this.root, (E)c);
+        this.queue = null;
     }
 
     private NodeA esborrar(NodeA n, E e) {

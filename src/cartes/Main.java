@@ -17,13 +17,14 @@ public class Main {
 
         Carta test = new Carta(2, 2); // 2 de OROS
         if(arbre.membre(test)) {
-            System.out.println("caca");
             arbre.esborrar(test);
-            System.out.println("caca");
         } else
             System.out.println("la carta no esta makina");
 
         arbre.iniRecorregut(true);
-        System.out.println("caca");
+        while(!arbre.finalRecorregut()) {
+            Carta c = arbre.segRecorregut();
+            System.out.println(c.toString());
+        }
     }
 }
