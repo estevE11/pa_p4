@@ -33,10 +33,10 @@ AcbEnll<E extends Comparable<E>> implements Acb{
         }
 
         public boolean hiEs(E val){ // NO FUNCIONA CRACK
-            if (val.compareTo(this.inf) < 0){
+            if (this.inf.compareTo(val) < 0){
                 if (this.l==null) return false;
                 return this.l.hiEs(val);
-            } else if (val.compareTo(this.inf) > 0) {
+            } else if (this.inf.compareTo(val) > 0) {
                 if (this.r==null) return false;
                 return this.r.hiEs(val);
             }else{
@@ -215,6 +215,7 @@ AcbEnll<E extends Comparable<E>> implements Acb{
     }
 
     private NodeA deleteMin(NodeA n) {
+        if(n == null) return null;
         if(n.l == null) return n.r; // de vez en cuando falla aqui, no entiendo ni cuando ni como
         else {
             n.l = deleteMin(n.l);
