@@ -22,5 +22,7 @@ public class Main {
             System.out.println("caca");
         } else
             System.out.println("la carta no esta makina");
+
+        arbre.iniRecorregut(true);
     }
 }

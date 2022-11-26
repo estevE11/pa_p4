@@ -2,6 +2,7 @@ package arbres;
 
 import cartes.Carta;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class
@@ -83,7 +84,21 @@ AcbEnll<E extends Comparable<E>> implements Acb{
         present el paràmetre alhora d’emplenar la cua
     */
     public void iniRecorregut(boolean sentit) {
+        this.queue = new LinkedList<E>();
+        this.addToQueue(this.root);
+        System.out.println("afegit");
+    }
 
+    private void addToQueue(NodeA a) {
+        if(a.l == null && a.r == null) {
+            this.queue.add(a.inf);
+            return;
+        }
+
+        if(a.l != null) this.addToQueue(a.l);
+        this.queue.add(a.inf);
+
+        if(a.r != null) this.addToQueue(a.r);
     }
 
     /*
@@ -211,7 +226,6 @@ AcbEnll<E extends Comparable<E>> implements Acb{
     public boolean membre(Comparable c) {
         if (this.root == null) return false;
         return this.root.hiEs((E)c);
-        //return this.membre(this.root, (E)c);
     }
 
     private boolean membre(NodeA a, E e) {
