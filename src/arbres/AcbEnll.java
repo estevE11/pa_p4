@@ -32,7 +32,7 @@ AcbEnll<E extends Comparable<E>> implements Acb{
             return count;
         }
 
-        public boolean hiEs(E val){
+        public boolean hiEs(E val){ // NO FUNCIONA CRACK
             if (val.compareTo(this.inf) < 0){
                 if (this.l==null) return false;
                 return this.l.hiEs(val);
@@ -52,7 +52,7 @@ AcbEnll<E extends Comparable<E>> implements Acb{
                 if(this.l == null) this.l = new NodeA(val);
                 else this.l.insert(val);
             }else {
-                throw new ArbreException("No es pot inserir perque ja existeix.");
+                //throw new ArbreException("No es pot inserir perque ja existeix.");
             }
             // Si la comparació es 0 vol dir que el que intentem
             // inserir ja existeix per tant no l'inserim

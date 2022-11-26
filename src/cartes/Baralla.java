@@ -20,10 +20,8 @@ public class Baralla {
     public Baralla() {
         // Crear una baraja entera desordenada (no esta desordenada)
         this.root = null;
-        for (int i = 0; i < Carta.TYPES.length; i++) {
-            for (int j = 0; j < 12; j++) {
-                this.add(new Carta(random.nextInt(11)+1, i));
-            }
+        while(this.size() < 40) {
+            this.add(new Carta(random.nextInt(11)+1, random.nextInt(4)));
         }
     }
 
