@@ -1,7 +1,5 @@
 package arbres;
 
-import cartes.Carta;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -153,7 +151,21 @@ AcbEnll<E extends Comparable<E>> implements Acb{
     }
 
     public Object clone() {
-        return null;
+        AcbEnll<E> cloned = new AcbEnll<E>();
+        try {
+            this.addToClone(this.root, cloned);
+        } catch(ArbreException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return cloned;
+    }
+    
+    private AcbEnll<E> addToClone(NodeA n, AcbEnll<E> cloned) throws ArbreException{
+        cloned.inserir(n.inf);
+        if(n.r != null) this.addToClone(n.r, cloned);
+        if(n.l != null) this.addToClone(n.l, cloned); 
+        return cloned;
     }
 
     @Override

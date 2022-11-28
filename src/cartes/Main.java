@@ -15,15 +15,18 @@ public class Main {
             arbre.inserir(c);
         }
 
+        AcbEnll<Carta> cloned = (AcbEnll<Carta>) arbre.clone();
+
         Carta test = new Carta(2, 2); // 2 de OROS
         if(arbre.membre(test)) {
             arbre.esborrar(test);
         } else
             System.out.println("la carta no esta makina");
 
-        while(!arbre.finalRecorregut()) {
-            Carta c = arbre.segRecorregut();
-            System.out.println(c.toString());
+        cloned.iniRecorregut(true);
+        while(!cloned.finalRecorregut()) {
+            Carta c = cloned.segRecorregut();
+            System.out.print(c.toString() + ", ");
         }
     }
 }
