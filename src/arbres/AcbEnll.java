@@ -23,7 +23,6 @@ AcbEnll<E extends Comparable<E>> implements Acb<E>{
         }
 
         public int count(){
-            System.out.println("contando: " + this.inf.toString());
             if (this.l == null && this.r == null) {
                 return 1;
             } else {
@@ -59,8 +58,36 @@ AcbEnll<E extends Comparable<E>> implements Acb<E>{
             // Si la comparació es 0 vol dir que el que intentem
             // inserir ja existeix per tant no l'inserim
         }
-        public void esborrar(E val) throws ArbreException{
+        public NodeA esborrar(E val) throws ArbreException{
+            if (inf.compareTo(val)<0){
+                if (l != null){
+                    l = l.esborrar(val);
+                    return this;
+                }else throw new ArbreException("no hi es");
 
+            }else if (inf.compareTo(val)>0){
+                if (r != null){
+                    r = r.esborrar(val);
+                    return this;
+                }else throw new ArbreException("no hi es");
+            }else {
+                if (l != null && r != null){
+                    inf = r.searchMinim();
+                    r = r.esborrar(inf);
+                    return this;
+                }else if (l == null && r == null) return null;
+                else if (l == null) return r;
+                else return l;
+            }
+        }
+
+        public E searchMinim(){
+            if (this.l == null) return this.inf;
+            NodeA aux = this.l;
+            while (aux.l != null){
+                aux = aux.l;
+            }
+            return aux.inf;
         }
     }
 
@@ -88,7 +115,6 @@ AcbEnll<E extends Comparable<E>> implements Acb<E>{
     public void iniRecorregut(boolean sentit) {
         this.queue = new LinkedList<E>();
         this.addToQueue(this.root, sentit);
-        System.out.println("afegit");
     }
 
     private void addToQueue(NodeA a, boolean sentit) {
@@ -146,7 +172,6 @@ AcbEnll<E extends Comparable<E>> implements Acb<E>{
     // Retorna el numero de nodes q te l'arbre
     public int cardinalitat() {
         int c = this.root.count();
-        System.out.println(c);
         return c;
     }
 
@@ -205,59 +230,16 @@ AcbEnll<E extends Comparable<E>> implements Acb<E>{
 
     @Override
     public void esborrar(E e) throws ArbreException {
-        this.root = this.esborrar(this.root, e);
+        if (this.root == null) throw new ArbreException("l'arbre és buit");
+        this.root = this.root.esborrar(e);
         this.queue = null;
     }
 
-    private NodeA esborrar(NodeA n, E e) {
-        if(n == null) throw new RuntimeException("no existeix " + e.toString());
-        int comp = n.inf.compareTo(e);
-        if(comp < 0) {
-            n.l = esborrar(n.l, e);
-        } else {
-            if(comp > 0) {
-                n.r = esborrar(n.r, e);
-            } else {
-                if(n.l == null && n.r == null) n = null;
-                else {
-                    if(n.l != null && n.r != null) {
-                        n = this.searchMin(n.r);
-                        n.r = deleteMin(n.r);
-                    } else {
-                        if(n.l == null) n = n.r;
-                        else n = n.l;
-                    }
-                }
-            }
-        }
-        return n;
-    }
-
-    private NodeA searchMin(NodeA n) {
-        while(n.l != null) n = n.l;
-        return n;
-    }
-
-    private NodeA deleteMin(NodeA n) {
-        if(n == null) return null;
-        if(n.l == null) return n.r; // de vez en cuando falla aqui, no entiendo ni cuando ni como
-        else {
-            n.l = deleteMin(n.l);
-            return n;
-        }
-    }
 
     @Override
     public boolean membre(E e) {
         if (this.root == null) return false;
         return this.root.hiEs(e);
-    }
-
-    private boolean membre(NodeA a, E e) {
-        if(a == null) return false;
-        if(e.compareTo(a.inf) == 0) return true;
-        if(e.compareTo(a.inf)<0) return membre(a.l,e);
-        else return membre(a.r,e);
     }
 
 }

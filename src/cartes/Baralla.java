@@ -1,5 +1,6 @@
 package cartes;
 
+import java.util.LinkedList;
 import java.util.Random;
 
 public class Baralla {
@@ -18,10 +19,25 @@ public class Baralla {
     private Node root;
 
     public Baralla() {
-        // Crear una baraja entera desordenada (no esta desordenada)
         this.root = null;
-        while(this.size() < 40) {
-            this.add(new Carta(random.nextInt(11)+1, random.nextInt(4)));
+
+        // Es crea una llista enllaçada amb les cartes ordenades
+        LinkedList<Carta> base = new LinkedList<Carta>();
+        for(int i = 0; i < 4; i++) {
+            for(int j = 0; j < 12; j++) {
+                base.add(new Carta(j+1, i));
+            }
+        }
+
+        // S'agafa una carta aleatoria, s'afegeix a la nostre llista enllaçada
+        // i s'elimina de la llista enllaçada base. Aixo fins que la llista base
+        // es quedi buida
+        int size = base.size();
+        while(size > 0) {
+            Carta c = base.get(random.nextInt(size));
+            this.add(c);
+            base.remove(c);
+            size = base.size();
         }
     }
 
@@ -42,7 +58,6 @@ public class Baralla {
         return false;
     }
 
-    // Testing: esto se tiene que mirar si cambiarlo ns si es lo que pide
     public Carta get(int i) {
         int curr_i = 0;
         Node curr_node = this.root;
