@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class
-AcbEnll<E extends Comparable<E>> implements Acb{
+AcbEnll<E extends Comparable<E>> implements Acb<E>{
 
     private class NodeA {
         NodeA l, r;
@@ -169,21 +169,20 @@ AcbEnll<E extends Comparable<E>> implements Acb{
     }
 
     @Override
-    public Comparable arrel() throws ArbreException {
-        return (Comparable) this.root;
+    public E arrel() throws ArbreException {
+        return this.root.inf;
     }
 
     @Override
-    public Acb fillEsquerre() {
+    public Acb<E> fillEsquerre() {
         NodeA l = this.root.l;
-        return new AcbEnll(l.inf, l.l, l.r);
+        return new AcbEnll<E>(l.inf, l.l, l.r);
     }
 
     @Override
-    public Acb fillDret() {
-
+    public Acb<E> fillDret() {
         NodeA r = this.root.r;
-        return new AcbEnll(r.inf, r.l, r.r);
+        return new AcbEnll<E>(r.inf, r.l, r.r);
     }
 
     @Override
@@ -198,16 +197,15 @@ AcbEnll<E extends Comparable<E>> implements Acb{
     }
 
     @Override
-    public void inserir(Comparable c) throws ArbreException {
-        E val = (E)c;
-        if(this.root == null) this.root = new NodeA(val, null, null);
-        else this.root.insert(val);
+    public void inserir(E e) throws ArbreException {
+        if(this.root == null) this.root = new NodeA(e, null, null);
+        else this.root.insert(e);
         this.queue = null;
     }
 
     @Override
-    public void esborrar(Comparable c) throws ArbreException {
-        this.root = this.esborrar(this.root, (E)c);
+    public void esborrar(E e) throws ArbreException {
+        this.root = this.esborrar(this.root, e);
         this.queue = null;
     }
 
@@ -250,9 +248,9 @@ AcbEnll<E extends Comparable<E>> implements Acb{
     }
 
     @Override
-    public boolean membre(Comparable c) {
+    public boolean membre(E e) {
         if (this.root == null) return false;
-        return this.root.hiEs((E)c);
+        return this.root.hiEs(e);
     }
 
     private boolean membre(NodeA a, E e) {
