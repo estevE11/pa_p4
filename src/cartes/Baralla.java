@@ -9,7 +9,6 @@ public class Baralla {
     private class Node {
         public Carta card;
         public Node next;
-        // Preguntar si puede guardar el valor del nodo anterior
 
         public Node(Carta card) {
             this.card = card;

@@ -86,7 +86,7 @@ public class Main {
 
         // Imprimim el arbre clonat de manera ordenada descendentment
         imprimirArbre(cloned, false);
-        System.out.println("");
+        System.out.println();
 
         Random random = new Random();
         int n = random.nextInt(30)+1;
